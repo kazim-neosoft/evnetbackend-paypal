@@ -1,10 +1,9 @@
 const dotenv = require('dotenv');
 dotenv.config();
 
-const { PAYPAL_MODE, PAYPAL_CLIENT, PAYPAL_SECRET } = process.env;
 
 module.exports = {
-	mode: PAYPAL_MODE,
-    client_id: PAYPAL_CLIENT,
-    client_secret: PAYPAL_SECRET
+	mode: process.env.PAYPAL_MODE,
+    client_id: process.env.PAYPAL_CLIENT,
+    client_secret: process.env.PAYPAL_SECRET
 };

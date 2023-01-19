@@ -1,24 +1,36 @@
-const paypalConfig = require("../config/paypalConfig");
+const {mode,client_id,client_secret} = require("../config/paypalConfig");
 const paypal=require('paypal-rest-sdk');
-paypal.configure(paypalConfig);
+// paypal.configure({mode,client_id,client_secret});
+paypal.configure({
+    mode:'',
+    client_id:'',
+    client_secret:''
+})
 
 const seatBooking=async(req,res)=>{
-    // console.log('req :>> ', req);
-    // console.log('req', req)
     try {
         const seatArray=[{
-            seatNum:"1",
-            price:1,
-            "currency": "USD"
+            "name":"1",
+            "price":2,
+            "currency": "USD",
+            "quantity":1
+        },
+        {
+            "name":"1",
+            "price":2,
+            "currency": "USD",
+            "quantity":1
         }];
         let totalSum=0;
         console.log('totalSum', totalSum)
         for(let data of seatArray){
             totalSum+=data.price
-            console.log('data.price :>> ', data.price);
-            console.log('totalSum', totalSum)
         }
-        req.session.totalPrice=totalSum;
+        
+        req.session.totalPrice=totalSum+"";
+        console.log(typeof( req.session.totalPrice));
+        // req.session.totalPrice=req.session.totalPrice+""
+        // console.log(typeof( req.session.totalPrice));
         console.log('req.session.totalPrice :>> ', req.session.totalPrice);
 
         const create_payment_json = {
@@ -32,13 +44,13 @@ const seatBooking=async(req,res)=>{
             },
             "transactions": [{
                 "item_list": {
-                    "items": seatArray
+                    "items":seatArray
                 },
                 "amount": {
                     "currency": "USD",
-                    "total": req.session.totalPrice+""
+                    "total": req.session.totalPrice
                 },
-                "description": "welcome to my booking"
+                "description": "Hat for the best team ever"
             }]
         };
 
@@ -46,11 +58,15 @@ const seatBooking=async(req,res)=>{
             if (error) {
                 throw error;
             } else {
+                // let arr=[]
                 for(const element of payment.links){
                   if(element.rel === 'approval_url'){
-                    res.redirect(element.href);
+                    console.log('element.href', element.href)
+                    // res.redirect(element.href);
+                    return res.json({paymenturl:element.href})
                   }
                 }
+                // return res.json({data:arr})
             }
           });
 
@@ -69,7 +85,7 @@ const successBooking=(req,res)=>{
           "transactions": [{
               "amount": {
                   "currency": "USD",
-                  "total": req.session.totalPrice+""
+                  "total":req.session.totalPrice
               }
           }]
         };
