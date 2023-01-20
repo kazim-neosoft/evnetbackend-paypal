@@ -22,5 +22,5 @@ module.exports = connectDB;
 // env secrets -Please update your env var here
 // PORT=7899
 // SECRET_KEY='12@456urlqwery'
-// CLIENTID='Af9lM61lhr_IIovVYIZbr2g3dNvw3_xPqtL6LlFVcgUK8wOGN8QFuWBlT06S76UvOgg3UOaIRwAppB9Y'
-// PAYPAL_SECRET='EIQIxEBlMMNIAAAOqyNiyR84-DSS5DJ3i7HHYlo7VAGYxwnWxpd0FoAWm04XWTQtZSEbkusbBgq5TWXP'
+// CLIENTID='AYNcZtoiThBeKcfhdi4_zt1VEyPAOu9R-5D96FJqHMUh94YIaop4inqRHty4U2MumskphTtVyFX7194u'
+// PAYPAL_SECRET='EBAQMoM3C-lsxAW16gL3VcTGD_6G_ZvtysW5uLqU8X9Q6jnuBl6jPGwMXN4diluI1BuEP3qF49krAcLh'
